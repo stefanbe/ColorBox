@@ -1,0 +1,87 @@
+Verwendet das ColorBox v1.5.14 Script um "Galerien", "Iframes" oder "HTNL Inhalt" Anzuzeigen<br />
+<span style="color:red;">Funktioniert nur mit JavaScript!</span><br /><br />
+Alle Parameter mussen mit einem "," (Komma) getrent werden.<br />
+<br />
+<b>Bei einer Galerie</b><br />
+<ul><li>muss der Erste Parameter eine Galerie sein</li>
+<li>Der zweite Parameter ist Optional "showonly" ohne das "=" zeichen</li></ul>
+<br />
+<b>Bei einem Bild</b><br />
+<ul><li>muss der Erste Parameter ein Vorschaubild erstelt mit der mozilo Syntax [bild/rechts/links|] sein oder ein Link Text</li>
+<li>muss der Zweite Parameter das grosse Bild erstelt mit der mozilo Syntax [bild|] sein.</li></ul>
+<br />
+
+<b>Bei Externen Inhalt (iFrame)</b><br />
+<ul><li>muss der Erste Parameter ein Link Text oder ein Bild sein</li>
+<li>iframe=(die url die geöfnet werden soll)</li></ul>
+<br />
+
+<b>Bei HTML Inhalt (z.B. [include|])</b><br />
+<ul><li>muss der Erste Parameter ein Link Text oder ein Bild sein</li>
+<li>inline_start=( der Inhalt )=inline_end</li>
+<li>scrolling=true benutzen wenn der Inhalt Scrolbar sein muss</li></ul>
+<br />
+
+<b>Optionale Parameter:</b><br />
+Die Werte Hinter dem "=" sind die Defaultwerte. Die Reihenfolge ist egal auser bei showonly ohne dem "=" Zeichen<br />
+<ul>
+<li><div>
+<div style="float:left;width:30%;">picsperrow=4</div>
+<div style="float:left;width:69%;">Eine Zahl zwischen 1 und 99. Die Anzahl der Spalten von den Vorschaubildern. Überschreibt den im Plugin Angegeben Wert.</div>
+<br style="clear:both;" /></div></li>
+<li><div>
+<div style="float:left;width:30%;">titleTooltip=true</div>
+<div style="float:left;width:69%;">true oder false. Untertitle als Tooltip Angezeigt oder nicht.</div>
+<br style="clear:both;" /></div></li>
+<li><div>
+<div style="float:left;width:30%;">showonly=</div>
+<div style="float:left;width:69%;">Entweder Text wird dann als Link Erstelt oder ein Bild mit der mozilo Syntax. Wenn showonly ohne "=" benutzt wird muss es der Zweite Parameter sein und es wird dann das Erste Bild der Galerie Benutzt</div>
+<br style="clear:both;" /></div></li></ul><br />
+Nähere Infos zu diesen Parametern gibts da <a href="http://www.jacklmoore.com/colorbox" target="_blank">www.jacklmoore.com/colorbox</a><br />
+<ul><li><div><div style="float:left;width:30%;">slideshow=false</div>true oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">slideshowSpeed=1000</div>Millisekunden<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">slideshowAuto=false</div>
+true oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">loop=false</div>true oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">transition=elastic</div>elastic, fade, oder none<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">speed=350</div>Millisekunden<br style="clear:both;" /></div></li>
+
+<li><div><div style="float:left;width:30%;">scrolling=false</div>
+true oder false Inhalt der ColorBox Scrolbar<br style="clear:both;" /></div></li>
+
+<li><div><div style="float:left;width:30%;">height=false</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">width=false</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">initialWidth=300</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">initialHeight=100</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">innerWidth=false</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">innerHeight=false</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">maxWidth=false</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">maxHeight=false</div>Zahl, Zahl mit "%" oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">opacity=0.7</div>Eine Zahl zwischen 0 und 1<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">fadeOut=300</div>Millisekunden<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">closeButton=true</div>true oder false<br style="clear:both;" /></div></li>
+</ul>
+<br />
+<b>Beispiele für eine Galerie:</b><br />
+<ul><li>Default Werte werden benutzt<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie}</span></li>
+<li>oder Bestimte Default Werte überschreiben<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie,picsperrow=4,maxWidth=75%,maxHeight=75%}</span></li>
+<li>oder nur einen Link erzeugen.<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie,showonly=Link Text}</span></li>
+<li>oder ein eigenes Vorschaubild benutzen.<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie,showonly=[bild|Vorschau Bild]}</span></li>
+<li>oder das erste Vorschaubild der Galerie benutzen.<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie,showonly}</span></li></ul>
+<br />
+<b>Beispiele für ein Bild:</b><br />
+<ul><li>Default Werte werden benutzt<br />
+<span style="font-weight:bold;">{ColorBox|[bild|mozilo.jpg],[bild|mozilo.jpg]}</span></li>
+<li>oder nur ein Link Tesxt<br />
+<span style="font-weight:bold;">{ColorBox|Link Text,[bild|mozilo.jpg]}</span></li>
+<li>oder mit Vorschaubild Untertitel und Titel in der ColorBox.<br />
+<span style="font-weight:bold;">{ColorBox|[bild=Untertitel|mozilo.jpg],[bild=Titel in ColorBox|mozilo.jpg]}</span></li>
+<li>oder Bestimte Default Werte überschreiben<br />
+<span style="font-weight:bold;">{ColorBox|[bild|mozilo.jpg],[bild|mozilo.jpg],maxWidth=75%,maxHeight=75%}</span></li></ul>
+<br />
+Website der ColorBox http://www.jacklmoore.com/colorbox.<br /><br />

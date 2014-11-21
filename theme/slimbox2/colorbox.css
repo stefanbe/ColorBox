@@ -1,0 +1,115 @@
+/* ColorBox Core Style:
+    The following CSS is consistent between example themes and should not be altered.*/
+#colorbox button::-moz-focus-inner {padding: 0; border: none;}
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative;}
+#cboxLoadedContent{overflow:auto; -webkit-overflow-scrolling: touch;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none;}
+.cboxIframe{width:100%; height:100%; display:block; border:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
+/* User Style:
+    Change the following styles to modify the appearance of ColorBox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.*/
+#cboxOverlay{background:#000;}
+#colorbox{outline:0;}
+#cboxContent{overflow:visible;}
+.cboxIframe{background:#fff;}
+#cboxError{padding:50px; border:1px solid #ccc;}
+#cboxLoadingGraphic{background:url(images/loading.gif) no-repeat center center;}
+#cboxTitle{position:relative; top:0; left:0; font-size:12px; line-height:15px; padding:5px 10px 5px 10px; margin:18px auto 0 auto; width:70%; font-weight:bold; color:#7C7C7C;}
+#cboxCurrent{position:absolute; font-size:12px; line-height:25px; left:0; font-weight:bold; color:#7C7C7C;}
+/* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+#cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose{background:transparent; border:0; padding:0; margin:0; overflow:visible; position:absolute; text-indent:-9999px;}
+#cboxSlideshow, #cboxClose {background:url(images/controls.png) no-repeat 0px 0px; width:25px; height:25px;}
+/* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+#cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active{outline:0;}
+#cboxPrevious, #cboxNext{top:0; width:50%; height:1px; padding:0; outline:none;}
+#cboxPrevious{left:0;}
+#cboxNext {right:0;}
+#cboxPrevious span{text-align:right; left:0;}
+#cboxNext span{text-align:left; right:0;}
+#cboxPrevious span, #cboxNext span{text-indent:0; display:block; position:absolute; top:45%; width:50px; height:45px; visibility:hidden;}
+#cboxPrevious:hover span, #cboxNext:hover span{visibility:visible;}
+#cboxPrevious img, #cboxNext img{margin:9px 9px; width:27px; height:27px;}
+#cboxClose{right:-4px; background-position:0px 0px;}
+#cboxClose:hover{background-position:0px -25px;}
+.cboxSlideshow_on #cboxSlideshow{background-position:-25px -25px; right:26px;}
+.cboxSlideshow_on #cboxSlideshow:hover{background-position:-50px -25px;}
+.cboxSlideshow_off #cboxSlideshow{background-position:-50px 0px; right:27px;}
+.cboxSlideshow_off #cboxSlideshow:hover{background-position:-25px -25px;}
+/* ######################### */
+/* Hintergrund Farbe */
+#colorbox, #cboxTitle, #cboxContent, .cboxPrevNextBgColor {
+    background-color: #fff;
+}
+/* Hintergrund Farbe der Vor Zurück buttons */
+.cboxPrevNextBgColor {
+    zoom: 1;
+    filter: alpha(opacity=60);
+    /* Older than Firefox 0.9 */
+    -moz-opacity:0.6;
+    /* Safari 1.x (pre WebKit!) */
+    -khtml-opacity: 0.6;
+    /* Modern! */
+    opacity: 0.6;
+}
+/* border des Fensters */
+#colorbox {
+    border:5px solid #000;
+}
+/* border vom Bild */
+#cboxLoadedContent {
+    border:none;
+}
+/* border vom Titel */
+#cboxTitle {
+    border:2px solid #000;
+}
+#cboxCurrent, #cboxTitle {
+    color:#000;
+}
+/* Rahmen um Bild links rechts oben */
+#cboxTopLeft, #cboxTopRight, #cboxBottomLeft, #cboxBottomRight, #cboxMiddleLeft, #cboxMiddleRight {
+    width:10px;
+}
+/* Rahmen um Bild links rechts oben */
+#cboxTopLeft, #cboxTopCenter, #cboxTopRight {
+    height:10px;
+}
+/* Rahmen Bild unten */
+#cboxBottomLeft, #cboxBottomCenter, #cboxBottomRight {
+    height:35px;
+}
+/* im Rahmen Bild unten die Position der Buttons */
+#cboxSlideshow, #cboxClose, #cboxCurrent {
+    bottom:-30px;
+}
+/* Runde ecken vom Fenster und Vor Zurück buttons */
+#colorbox, #cboxTitle, #cboxNext span {
+    -moz-border-radius-topleft: .6em;
+    -webkit-border-top-left-radius: .6em;
+    -khtml-border-top-left-radius: .6em;
+    border-top-left-radius: .6em;
+}
+#colorbox, #cboxTitle, #cboxPrevious span {
+    -moz-border-radius-topright: .6em;
+    -webkit-border-top-right-radius: .6em;
+    -khtml-border-top-right-radius: .6em;
+    border-top-right-radius: .6em;
+}
+#colorbox, #cboxTitle, #cboxNext span {
+    -moz-border-radius-bottomleft: .6em;
+    -webkit-border-bottom-left-radius: .6em;
+    -khtml-border-bottom-left-radius: .6em;
+    border-bottom-left-radius: .6em;
+}
+#colorbox, #cboxTitle, #cboxPrevious span {
+    -moz-border-radius-bottomright: .6em;
+    -webkit-border-bottom-right-radius: .6em;
+    -khtml-border-bottom-right-radius: .6em;
+    border-bottom-right-radius: .6em;
+}

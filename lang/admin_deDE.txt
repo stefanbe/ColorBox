@@ -1,0 +1,10 @@
+picsperrow       = Vorschaubilder pro Zeile der Galerie
+picsperrow_error = Zahl 1-99 erlaubt!
+cfgTxtThumbnail  = Text unter dem Vorschaubildern der Galerie
+cfgTxtcolorbox   = Text im colorbox-Fenster der Galerie
+title            = Bild-Titel wie in Galerie angegeben
+filename         = Bild-Dateiname
+nothing          = Nichts
+theme            = Layout der ColoBox
+info_error       = Kann die Info Datei nicht Öffnen
+info_description = Siehe Plugin Beschreibung
