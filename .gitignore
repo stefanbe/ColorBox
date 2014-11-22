@@ -6,8 +6,11 @@
 
 */
 !lang/
+!lang/*
 !js/
+!js/*
 !theme/
+!theme/*
 
 # algemein
 .DS_Store
