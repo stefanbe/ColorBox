@@ -1,4 +1,4 @@
 ColorBox
 ========
 
-mozilo Plugin
+moziloCMS 2.0 Plugin
