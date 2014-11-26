@@ -268,10 +268,9 @@ class ColorBox extends Plugin {
         $thumbs .= "</tr></table>\n";
         }
         $thumbs .= "</div>";
-        $thumbs = '<div class="embeddedgallery">' . $thumbs . '</div>';
-
-        // Rückgabe der Thumbnails
-        return $thumbs;
+        if (!is_null($this->para["showonly"]))
+            return $thumbs;
+        return '<div class="embeddedgallery">' . $thumbs . '</div>';
     }
 
     // ------------------------------------------------------------------------------
