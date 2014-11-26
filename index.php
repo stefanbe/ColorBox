@@ -236,7 +236,7 @@ class ColorBox extends Plugin {
                         $thumbs .= '<a href="'.$specialchars->replaceSpecialChars($dir_gallery_url.$picarray[$i],true).'" title="'. $colorbox_description.'" class="colorboxlink">';
                         $thumbs .= '<img src="'.$specialchars->replaceSpecialChars($dir_thumbs_url.$picarray[$i],true).'" alt="'.$alttext.'" class="thumbnail" />';
                         $thumbs .= "</a>";
-                    } else { 
+                    } else {
                         // Bild aus mozilo Syntax als Vorschau oder Textlink
                         // oder beliebiger Textlink als Vorschau
                         $thumbs .= '<a href="'.$specialchars->replaceSpecialChars($dir_gallery_url.$picarray[$i],true).'" title="'.$colorbox_description.'" class="colorboxlink">';
@@ -245,7 +245,7 @@ class ColorBox extends Plugin {
                     }
                 } else { // (i==0)
                     // sonst nurmehr die <a href..> für colorbox-Fenster erzeugen
-                    $thumbs .= '<a href="'.$specialchars->replaceSpecialChars($dir_gallery_url.$picarray[$i],true).'" title="'. $colorbox_description.'" class="colorboxlink"></a>'."\n";
+                    $thumbs .= '<a href="'.$specialchars->replaceSpecialChars($dir_gallery_url.$picarray[$i],true).'" title="'. $colorbox_description.'" class="colorboxlink" style="display:none;"></a>'."\n";
                 }
             } else { // !is_null($singlePreview) - normale Darstellung
                 if (($i > 0) && ($i % $this->para["picsperrow"] == 0)) // Neue Tabellenzeile aller picsperrow Zeichen
