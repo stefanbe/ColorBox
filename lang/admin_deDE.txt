@@ -8,3 +8,17 @@ nothing          = Nichts
 theme            = Layout der ColoBox
 info_error       = Kann die Info Datei nicht Öffnen
 info_description = Siehe Plugin Beschreibung
+maxWidth         = Maximale Breite im Browser (Zahl, Zahl% oder Lehr=nicht Benutzen)
+maxHeight        = Maximale Höhe im Browser (Zahl, Zahl% oder Lehr=nicht Benutzen)
+transition       = Übergang der beim wechseln der Bilder benutzt werden soll
+transition_none    = Keine Übergang
+transition_elastic = Elastisch
+transition_fade    = Verblassen
+speed            = Zeitspanne für den Übergang in Millisekunden (Default=300)
+fadeOut          = Zeitspanne für das Schließen in Millisekunden (Default=300)
+slideshowAuto    = Slideshow Automatisch Starten
+slideshowSpeed   = Wartezeit zwischen den Bildern in Millisekunden (Default=2500)
+loop             = Looping der Bilder
+closeButton      = Schließen Butten Zeigen
+digit_error      = Nur Zahlen sind Erlaubt
+emptydigit_error = Nur Zahlen Optional mit "%" sind Erlaubt oder Lehr lassen

@@ -1,4 +1,4 @@
-# Formular
+# ColorBox
 *.*
 !.gitignore
 !README.md
@@ -9,8 +9,27 @@
 !lang/*
 !js/
 !js/*
+!js/i18n/*
 !theme/
 !theme/*
+
+!theme/example1/*
+!theme/example1/images/*
+!theme/example2/*
+!theme/example2/images/*
+!theme/example3/*
+!theme/example3/images/*
+!theme/example4/*
+!theme/example4/images/*
+!theme/example5/*
+!theme/example5/images/*
+!theme/fancybox/*
+!theme/fancybox/images/*
+!theme/fancybox_neu/*
+!theme/fancybox_neu/images/*
+!theme/slimbox2/*
+!theme/slimbox2/images/*
+
 
 # algemein
 .DS_Store

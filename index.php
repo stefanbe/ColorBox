@@ -11,28 +11,32 @@ class ColorBox extends Plugin {
     var $para_def = array(0 => NULL,1 => NULL,"thumb" => false,"img" => false,"imgtitle" => NULL,"gal" => false,
             "iframe" => false,
             "inline" => false,
-            "scrolling" => false,
+            "scrolling" => true,
             "picsperrow" => 4,
             "showonly" => NULL,
             "slideshow" => false,
-            "slideshowSpeed" => "2000",
+            "slideshowSpeed" => "2500",
             "slideshowAuto" => false,
             "loop" => true,
             "transition" => "elastic",
-            "speed" => "350",
+            "speed" => "300",
             "height" => false,
             "width" => false,
-            "initialWidth" => "300",
-            "initialHeight" => "100",
+            "initialWidth" => "600",
+            "initialHeight" => "450",
             "innerWidth" => false,
             "innerHeight" => false,
             "maxWidth" => false,
             "maxHeight" => false,
-            "opacity" => "0.7",
+            "opacity" => "0.9",
             # neu in 1.4.31
             "fadeOut" => "300",
             "closeButton" => true,
-            "titleTooltip" => true
+            "titleTooltip" => true,
+
+            "returnFocus" => false,# org = true
+            "scalePhotos" => true,
+            "reposition" => true
         );
     var $para = array();
     var $para_script = array();
@@ -42,7 +46,16 @@ class ColorBox extends Plugin {
             "picsperrow" => "4",
             "cfgTxtThumbnail" => "nothing",
             "cfgTxtcolorbox" => "nothing",
-            "theme" => "slimbox2"
+            "theme" => "slimbox2",
+            "maxWidth" => "",
+            "maxHeight" => "",
+            "transition" => "elastic",
+            "speed" => "300",
+            "fadeOut" => "300",
+            "slideshowAuto" => "false",
+            "slideshowSpeed" => "2500",
+            "loop" => "true",
+            "closeButton" => "true"
         );
     }
 
@@ -64,8 +77,22 @@ class ColorBox extends Plugin {
             $syntax->content = str_replace(array("</body>","</BODY>"),$inline_div."\n</body>",$syntax->content);
         }
         $this->para_script = array();
-        $this->para_def["picsperrow"] = $this->settings->get("picsperrow");
-        $this->para = $this->makeUserParaArray($value,$this->para_def);
+        $para = $this->para_def;
+        $para["picsperrow"] = $this->settings->get("picsperrow") ? $this->settings->get("picsperrow") : "4";
+
+        $para["maxWidth"] = $this->settings->get("maxWidth") ? $this->settings->get("maxWidth") : false;
+
+        $para["maxHeight"] = $this->settings->get("maxHeight") ? $this->settings->get("maxHeight") : false;
+        $para["transition"] = $this->settings->get("transition") ? $this->settings->get("transition") : "elastic";
+        $para["speed"] = $this->settings->get("speed") ? $this->settings->get("speed") : "300";
+        $para["fadeOut"] = $this->settings->get("fadeOut") ? $this->settings->get("fadeOut") : "300";
+        $para["slideshowAuto"] = ($this->settings->get("slideshowAuto") == "true") ? true : false;
+        $para["slideshowSpeed"] = $this->settings->get("slideshowSpeed") ? $this->settings->get("slideshowSpeed") : "2500";
+        $para["loop"] = ($this->settings->get("loop") == "true") ? true : false;
+        $para["closeButton"] = ($this->settings->get("closeButton") == "true") ? true : false;
+
+        $this->para = $this->makeUserParaArray($value,$para);
+        unset($para);
 
         $s_src = 'src="'; $l_src = strlen($s_src);
         $s_title = 'imagesubtitle">'; $l_title = strlen($s_title);
@@ -104,8 +131,11 @@ class ColorBox extends Plugin {
                 $this->para["showonly"] = $values;
             } elseif($key == "picsperrow") {
                 $this->para[$key] = $values;
-            } elseif(in_array($key,array("slideshow","slideshowSpeed","slideshowAuto","loop","transition","speed","height","width","initialWidth","initialHeight","innerWidth","innerHeight","maxWidth","maxHeight","opacity","scrolling","fadeOut","closeButton"))) {
-                $this->para_script[$key] = $values;
+            } elseif(in_array($key,array("slideshow","slideshowSpeed","slideshowAuto","loop","transition","speed","height","width","initialWidth","initialHeight","innerWidth","innerHeight","maxWidth","maxHeight","opacity","scrolling","fadeOut","closeButton","returnFocus","scalePhotos","reposition"))) {
+                if($this->para_def[$key] !== $this->para[$key])
+                    $this->para_script[$key] = $values;
+                if($key == "returnFocus" or $key == "slideshowAuto")# or $key == "scrolling"
+                    $this->para_script[$key] = $values;
             }
         }
         unset($this->para[0],$this->para[1]);
@@ -138,20 +168,18 @@ class ColorBox extends Plugin {
             global $syntax;
             $syntax->insert_jquery_in_head('jquery');
             $syntax->insert_in_head($this->ColorBoxhead());
-
+            $para = "";
             $html .= '<script type="text/javascript">'
                 .'jQuery("'.$jquery_id.'").colorbox({';
                 foreach($this->para_script as $key => $value) {
                     if($value === "true" or (is_bool($value) and $value))
-                        $html .= $key.':true,';
+                        $para .= $key.':true,';
                     elseif($value === "false" or (is_bool($value) and !$value))
-                        $html .= $key.':false,';
+                        $para .= $key.':false,';
                     else
-                        $html .= $key.':"'.$value.'",';
+                        $para .= $key.':"'.$value.'",';
                 }
-                $html .= 'returnFocus:false,'
-                .'scalePhotos:true,'
-                .'reposition:true});';
+                $html .= trim($para,"\x2C").'});';
                 if($this->settings->get("cfgTxtcolorbox") !== "nothing"
                         and $this->para["titleTooltip"] === "false") {
                     $html .= '$(function() {'
@@ -355,7 +383,68 @@ class ColorBox extends Plugin {
             "description" => $this->admin_lang->getLanguageValue("theme"),
             "descriptions" => $theme,
             "multiple" => "false"
-            ); 
+            );
+        $config['maxWidth'] = array(
+            "type" => "text",
+            "maxlength" => "8",
+            "size" => "5",
+            "description" => $this->admin_lang->getLanguageValue("maxWidth"),
+            "regex" => "/^(\d+(%)?){1}$/",
+            "regex_error" => $this->admin_lang->getLanguageValue("emptydigit_error")
+        );
+        $config['maxHeight'] = array(
+            "type" => "text",
+            "maxlength" => "8",
+            "size" => "5",
+            "description" => $this->admin_lang->getLanguageValue("maxHeight"),
+            "regex" => "/^(\d+(%)?){1}$/",
+            "regex_error" => $this->admin_lang->getLanguageValue("emptydigit_error")
+        );
+        $config['transition'] = array(
+            "type" => "select",
+            "description" => $this->admin_lang->getLanguageValue("transition"),
+            "descriptions" => array(
+                "none" => $this->admin_lang->getLanguageValue("transition_none"),
+                "elastic" => $this->admin_lang->getLanguageValue("transition_elastic"),
+                "fade" => $this->admin_lang->getLanguageValue("transition_fade")),
+            "multiple" => "false"
+            );
+        $config['speed'] = array(
+            "type" => "text",
+            "maxlength" => "8",
+            "size" => "5",
+            "description" => $this->admin_lang->getLanguageValue("speed"),
+            "regex" => "/^\d+$/",
+            "regex_error" => $this->admin_lang->getLanguageValue("digit_error")
+        );
+        $config['fadeOut'] = array(
+            "type" => "text",
+            "maxlength" => "8",
+            "size" => "5",
+            "description" => $this->admin_lang->getLanguageValue("fadeOut"),
+            "regex" => "/^\d+$/",
+            "regex_error" => $this->admin_lang->getLanguageValue("digit_error")
+        );
+        $config['slideshowAuto'] = array(
+            "type" => "checkbox",
+            "description" => $this->admin_lang->getLanguageValue("slideshowAuto")
+        );
+        $config['slideshowSpeed'] = array(
+            "type" => "text",
+            "maxlength" => "8",
+            "size" => "5",
+            "description" => $this->admin_lang->getLanguageValue("slideshowSpeed"),
+            "regex" => "/^\d+$/",
+            "regex_error" => $this->admin_lang->getLanguageValue("digit_error")
+        );
+        $config['loop'] = array(
+            "type" => "checkbox",
+            "description" => $this->admin_lang->getLanguageValue("loop")
+        );
+        $config['closeButton'] = array(
+            "type" => "checkbox",
+            "description" => $this->admin_lang->getLanguageValue("closeButton")
+        );
         return $config;
     }
 
@@ -369,7 +458,7 @@ class ColorBox extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>ColorBox</b> Revision: 10",
+            "<b>ColorBox</b> Revision: 11",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
