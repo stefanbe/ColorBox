@@ -25,8 +25,8 @@
 !theme/example5/images/*
 !theme/fancybox/*
 !theme/fancybox/images/*
-!theme/fancybox_neu/*
-!theme/fancybox_neu/images/*
+# !theme/fancybox_neu/*
+# !theme/fancybox_neu/images/*
 !theme/slimbox2/*
 !theme/slimbox2/images/*
 
