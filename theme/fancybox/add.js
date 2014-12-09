@@ -1,4 +1,5 @@
 jQuery.extend(jQuery.colorbox.settings, {
+    opacity:0.7,
     title: function() {
         if(typeof $(this).data('title') != "undefined")
             return ($(this).data('title')) ? '<span>'+$(this).data('title')+'</span>' : '';

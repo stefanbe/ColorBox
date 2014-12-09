@@ -1,4 +1,5 @@
 jQuery.extend(jQuery.colorbox.settings, {
+    opacity:0.7,
     title: function() { return ($(this).data('title')) ? $(this).data('title') : this.title; },
     next: jQuery.colorbox.settings.next+'<span class="cboxPrevNextBgColor"></span><span><img src="'+theme_url+'images/Next.png"></span>',
     previous: jQuery.colorbox.settings.previous+'<span class="cboxPrevNextBgColor"></span><span><img src="'+theme_url+'images/Prev.png"></span>',
