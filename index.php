@@ -36,7 +36,9 @@ class ColorBox extends Plugin {
 
             "returnFocus" => false,# org = true
             "scalePhotos" => true,
-            "reposition" => true
+            "reposition" => true,
+            "sort" => false,
+            "reverse" => false
         );
     var $para = array();
     var $para_script = array();
@@ -96,6 +98,7 @@ class ColorBox extends Plugin {
 
         $s_src = 'src="'; $l_src = strlen($s_src);
         $s_title = 'imagesubtitle">'; $l_title = strlen($s_title);
+        $flags = array("SORT_REGULAR" => SORT_REGULAR,"SORT_NUMERIC" => SORT_NUMERIC,"SORT_STRING" => SORT_STRING,"NATURAL" => "NATURAL");
         foreach($this->para as $key => $values) {
             if(is_string($values))
                 $values = trim($values);
@@ -131,6 +134,15 @@ class ColorBox extends Plugin {
                 $this->para["showonly"] = $values;
             } elseif($key == "picsperrow") {
                 $this->para[$key] = $values;
+            } elseif($key == "sort") {
+                if(strpos($values,"REVERSE") !== false) {
+                    $this->para["reverse"] = true;
+                    $values = trim(str_replace("REVERSE","",$values));
+                }
+                if(in_array($values,array("SORT_REGULAR","SORT_NUMERIC","SORT_STRING","NATURAL")))
+                    $this->para[$key] = $flags[$values];
+                else
+                    $this->para[$key] = false;
             } elseif(in_array($key,array("slideshow","slideshowSpeed","slideshowAuto","loop","transition","speed","height","width","initialWidth","initialHeight","innerWidth","innerHeight","maxWidth","maxHeight","opacity","scrolling","fadeOut","closeButton","returnFocus","scalePhotos","reposition"))) {
                 if($this->para_def[$key] !== $this->para[$key])
                     $this->para_script[$key] = $values;
@@ -335,7 +347,15 @@ class ColorBox extends Plugin {
             }
         }
         closedir($currentdir);
-        sort($picarray);
+        if($this->para["sort"] !== false) {
+            if($this->para["sort"] == "NATURAL")
+                natsort($picarray);
+            else
+                sort($picarray,$this->para["sort"]);
+        } else
+            sort($picarray);
+        if($this->para["reverse"] === true)
+            $picarray = array_reverse($picarray);
         return $picarray;
     }
 
@@ -458,7 +478,7 @@ class ColorBox extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>ColorBox</b> Revision: 11",
+            "<b>ColorBox</b> Revision: 12",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung

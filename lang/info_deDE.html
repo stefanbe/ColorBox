@@ -63,6 +63,7 @@ true oder false Inhalt der ColorBox Scrolbar<br style="clear:both;" /></div></li
 <li><div><div style="float:left;width:30%;">returnFocus=false</div>true oder false<br style="clear:both;" /></div></li>
 <li><div><div style="float:left;width:30%;">scalePhotos=true</div>true oder false<br style="clear:both;" /></div></li>
 <li><div><div style="float:left;width:30%;">reposition=true</div>true oder false<br style="clear:both;" /></div></li>
+<li><div><div style="float:left;width:30%;">sort=false</div>SORT_REGULAR, SORT_NUMERIC, SORT_STRING oder NATURAL. REVERSE Bilder in umgekehrter Reihenfolge<br style="clear:both;" /></div></li>
 </ul>
 <br />
 <b>Beispiele für eine Galerie:</b><br />
@@ -75,7 +76,14 @@ true oder false Inhalt der ColorBox Scrolbar<br style="clear:both;" /></div></li
 <li>oder ein eigenes Vorschaubild benutzen.<br />
 <span style="font-weight:bold;">{ColorBox|eine Galerie,showonly=[bild|Vorschau Bild]}</span></li>
 <li>oder das erste Vorschaubild der Galerie benutzen.<br />
-<span style="font-weight:bold;">{ColorBox|eine Galerie,showonly}</span></li></ul>
+<span style="font-weight:bold;">{ColorBox|eine Galerie,showonly}</span></li>
+<li>Sortieren der Galerie.<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie,sort=SORT_NUMERIC}</span></li>
+<li>Sortieren der Galerie mit umgekehrter Reihenfolge.<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie,sort=SORT_NUMERIC REVERSE}</span></li>
+<li>Galerie in umgekehrter Reihenfolge.<br />
+<span style="font-weight:bold;">{ColorBox|eine Galerie,sort=REVERSE}</span></li>
+</ul>
 <br />
 <b>Beispiele für ein Bild:</b><br />
 <ul><li>Default Werte werden benutzt<br />
