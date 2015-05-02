@@ -1,24 +1,24 @@
 picsperrow       = Vorschaubilder pro Zeile der Galerie
 picsperrow_error = Zahl 1-99 erlaubt!
-cfgTxtThumbnail  = Text unter dem Vorschaubildern der Galerie
-cfgTxtcolorbox   = Text im colorbox-Fenster der Galerie
+cfgTxtThumbnail  = Text unter den Vorschaubildern der Galerie
+cfgTxtcolorbox   = Text im ColorBox-Fenster der Galerie
 title            = Bild-Titel wie in Galerie angegeben
 filename         = Bild-Dateiname
 nothing          = Nichts
-theme            = Layout der ColoBox
+theme            = Layout der ColorBox
 info_error       = Kann die Info Datei nicht Öffnen
 info_description = Siehe Plugin Beschreibung
-maxWidth         = Maximale Breite im Browser (Zahl, Zahl% oder Lehr=nicht Benutzen)
-maxHeight        = Maximale Höhe im Browser (Zahl, Zahl% oder Lehr=nicht Benutzen)
+maxWidth         = Maximale Breite im Browser (Zahl, Zahl% oder leer=nicht benutzen)
+maxHeight        = Maximale Höhe im Browser (Zahl, Zahl% oder leer=nicht benutzen)
 transition       = Übergang der beim wechseln der Bilder benutzt werden soll
-transition_none    = Keine Übergang
+transition_none    = Kein Übergang
 transition_elastic = Elastisch
 transition_fade    = Verblassen
 speed            = Zeitspanne für den Übergang in Millisekunden (Default=300)
 fadeOut          = Zeitspanne für das Schließen in Millisekunden (Default=300)
-slideshowAuto    = Slideshow Automatisch Starten
+slideshowAuto    = Slideshow automatisch starten
 slideshowSpeed   = Wartezeit zwischen den Bildern in Millisekunden (Default=2500)
 loop             = Looping der Bilder
-closeButton      = Schließen Butten Zeigen
+closeButton      = Schließen Button zeigen
 digit_error      = Nur Zahlen sind Erlaubt
 emptydigit_error = Nur Zahlen Optional mit "%" sind Erlaubt oder Lehr lassen

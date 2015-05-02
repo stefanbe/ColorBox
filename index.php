@@ -478,7 +478,7 @@ class ColorBox extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>ColorBox</b> Revision: 12",
+            "<b>ColorBox</b> Revision: 13",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
