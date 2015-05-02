@@ -57,7 +57,9 @@ class ColorBox extends Plugin {
             "slideshowAuto" => "false",
             "slideshowSpeed" => "2500",
             "loop" => "true",
-            "closeButton" => "true"
+            "closeButton" => "true",
+            "sort" => "false",
+            "reverse" => "false"
         );
     }
 
@@ -92,13 +94,14 @@ class ColorBox extends Plugin {
         $para["slideshowSpeed"] = $this->settings->get("slideshowSpeed") ? $this->settings->get("slideshowSpeed") : "2500";
         $para["loop"] = ($this->settings->get("loop") == "true") ? true : false;
         $para["closeButton"] = ($this->settings->get("closeButton") == "true") ? true : false;
+        $para["sort"] = ($this->settings->get("sort") != "false") ? $this->settings->get("sort") : false;
+        $para["reverse"] = ($this->settings->get("reverse") == "true") ? true : false;
 
         $this->para = $this->makeUserParaArray($value,$para);
         unset($para);
 
         $s_src = 'src="'; $l_src = strlen($s_src);
         $s_title = 'imagesubtitle">'; $l_title = strlen($s_title);
-        $flags = array("SORT_REGULAR" => SORT_REGULAR,"SORT_NUMERIC" => SORT_NUMERIC,"SORT_STRING" => SORT_STRING,"NATURAL" => "NATURAL");
         foreach($this->para as $key => $values) {
             if(is_string($values))
                 $values = trim($values);
@@ -135,14 +138,17 @@ class ColorBox extends Plugin {
             } elseif($key == "picsperrow") {
                 $this->para[$key] = $values;
             } elseif($key == "sort") {
-                if(strpos($values,"REVERSE") !== false) {
+                if(strpos($values,"NO_REVERSE") !== false)
+                    $this->para["reverse"] = false;
+                elseif(strpos($values,"REVERSE") !== false)
                     $this->para["reverse"] = true;
-                    $values = trim(str_replace("REVERSE","",$values));
+                $values = trim(str_replace(array("REVERSE","NO_REVERSE"),"",$values));
+                if(!empty($values)) {
+                    if(in_array($values,array("SORT_REGULAR","SORT_NUMERIC","SORT_STRING","NATURAL")))
+                        $this->para[$key] = $values;
+                    else
+                        $this->para[$key] = false;
                 }
-                if(in_array($values,array("SORT_REGULAR","SORT_NUMERIC","SORT_STRING","NATURAL")))
-                    $this->para[$key] = $flags[$values];
-                else
-                    $this->para[$key] = false;
             } elseif(in_array($key,array("slideshow","slideshowSpeed","slideshowAuto","loop","transition","speed","height","width","initialWidth","initialHeight","innerWidth","innerHeight","maxWidth","maxHeight","opacity","scrolling","fadeOut","closeButton","returnFocus","scalePhotos","reposition"))) {
                 if($this->para_def[$key] !== $this->para[$key])
                     $this->para_script[$key] = $values;
@@ -339,6 +345,7 @@ class ColorBox extends Plugin {
     function getColorBoxPicsAsArray($dir, $filetypes) {
         $picarray = array();
         $currentdir = opendir($dir);
+        $flags = array("SORT_REGULAR" => SORT_REGULAR,"SORT_NUMERIC" => SORT_NUMERIC,"SORT_STRING" => SORT_STRING);
         // Alle Dateien des übergebenen Verzeichnisses einlesen...
         while ($file = readdir($currentdir)){
             if(isValidDirOrFile($file) and (in_array(strtolower(substr(strrchr($file, "."), 1, strlen(strrchr($file, "."))-1)), $filetypes))) {
@@ -351,7 +358,7 @@ class ColorBox extends Plugin {
             if($this->para["sort"] == "NATURAL")
                 natsort($picarray);
             else
-                sort($picarray,$this->para["sort"]);
+                sort($picarray,$flags[$this->para["sort"]]);
         } else
             sort($picarray);
         if($this->para["reverse"] === true)
@@ -428,7 +435,7 @@ class ColorBox extends Plugin {
                 "elastic" => $this->admin_lang->getLanguageValue("transition_elastic"),
                 "fade" => $this->admin_lang->getLanguageValue("transition_fade")),
             "multiple" => "false"
-            );
+        );
         $config['speed'] = array(
             "type" => "text",
             "maxlength" => "8",
@@ -465,6 +472,21 @@ class ColorBox extends Plugin {
             "type" => "checkbox",
             "description" => $this->admin_lang->getLanguageValue("closeButton")
         );
+        $config['sort'] = array(
+            "type" => "select",
+            "description" => $this->admin_lang->getLanguageValue("transition"),
+            "descriptions" => array(
+                "false" => $this->admin_lang->getLanguageValue("sort_none"),
+                "SORT_REGULAR" => $this->admin_lang->getLanguageValue("sort_regular"),
+                "SORT_NUMERIC" => $this->admin_lang->getLanguageValue("sort_numeric"),
+                "SORT_STRING" => $this->admin_lang->getLanguageValue("sort_string"),
+                "NATURAL" => $this->admin_lang->getLanguageValue("sort_natural")),
+            "multiple" => "false"
+        );
+        $config['reverse'] = array(
+            "type" => "checkbox",
+            "description" => $this->admin_lang->getLanguageValue("reverse")
+        );
         return $config;
     }
 
@@ -478,7 +500,7 @@ class ColorBox extends Plugin {
 
         $info = array(
             // Plugin-Name
-            "<b>ColorBox</b> Revision: 13",
+            "<b>ColorBox</b> Revision: 14",
             // Plugin-Version
             "2.0",
             // Kurzbeschreibung
